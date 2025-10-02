@@ -1,0 +1,35 @@
+// Дана структура Human (с произвольным набором полей и методов).
+// Реализовать встраивание методов в структуре Action от родительской структуры Human (аналог наследования).
+// Подсказка: используйте композицию (embedded struct), чтобы Action имел все методы Human.
+
+package main
+
+import "fmt"
+
+type Human struct {
+	Name string
+	Age  int
+}
+
+func (h *Human) Speak() {
+	fmt.Printf("Hello %s.\n", h.Name)
+}
+
+type Action struct {
+	Human
+	Profession string
+}
+
+func main() {
+	action := Action{
+		Human: Human{
+			Name: "Тестовое имя",
+			Age:  99,
+		},
+		Profession: "Тестовая профессия",
+	}
+
+	action.Speak()
+
+	fmt.Printf("Профессия: %s\n", action.Profession)
+}
